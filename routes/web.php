@@ -16,3 +16,14 @@ Route::get('/', function () {
     return User::all();
     //return view('welcome');
 });
+Route::prefix('admin')->namespace('Admin')->group(function(){
+
+	Route::prefix('store')->group(function(){
+		Route::get('/','StoreController@index'); //Lista as lojas existentes
+		Route::get('/create','StoreController@create'); //Abre o formulario para criaçao
+		Route::post('/store','StoreController@store'); //Grava na Base de Dados
+
+		Route::get('/{store}/edit', 'StoreController@edit');
+		Route::post('/update/{store}', 'StoreController@update');
+	});
+});
