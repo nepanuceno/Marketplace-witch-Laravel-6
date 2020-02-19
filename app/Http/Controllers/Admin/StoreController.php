@@ -43,17 +43,13 @@ class StoreController extends Controller
         $result = \App\Store::find($store);
         $result->update($request->all());
 
-        $stores = \App\Store::paginate();
-
-        return view('admin.store.stores', compact('stores'))->with('success','Loja modificada com sucesso!');
-
+        return redirect('admin/store')->with('status','Loja modificada com sucesso!');
     }
 
     public function delete($store)
     {
         $store = \App\Store::destroy($store);
 
-        return view('admin.store.stores')->with('success','Loja Apagada com sucesso!');
-
+        return redirect('admin/store')->with('status','Loja Apagada com sucesso!');
     }
 }

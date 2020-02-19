@@ -13,8 +13,8 @@
 use \App\User;
 Route::get('/', function () {
 
-    return User::all();
-    //return view('welcome');
+    //return User::all();
+    return view('welcome');
 });
 Route::prefix('admin')->namespace('Admin')->group(function(){
 
