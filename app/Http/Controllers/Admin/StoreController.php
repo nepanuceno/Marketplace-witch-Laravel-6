@@ -15,7 +15,6 @@ class StoreController extends Controller
         return view('admin.store.stores', compact('stores'));
     }
 
-
     public function create()
     {
 
@@ -47,6 +46,14 @@ class StoreController extends Controller
         $stores = \App\Store::paginate();
 
         return view('admin.store.stores', compact('stores'))->with('success','Loja modificada com sucesso!');
+
+    }
+
+    public function delete($store)
+    {
+        $store = \App\Store::destroy($store);
+
+        return view('admin.store.stores')->with('success','Loja Apagada com sucesso!');
 
     }
 }

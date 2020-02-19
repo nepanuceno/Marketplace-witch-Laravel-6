@@ -24,6 +24,7 @@ Route::prefix('admin')->namespace('Admin')->group(function(){
 		Route::post('/store','StoreController@store'); //Grava na Base de Dados
 
 		Route::get('/{store}/edit', 'StoreController@edit');
-		Route::post('/update/{store}', 'StoreController@update');
+        Route::post('/update/{store}', 'StoreController@update');
+        Route::get('/{store}/delete', 'StoreController@delete');
 	});
 });
