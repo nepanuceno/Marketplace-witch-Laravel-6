@@ -2,18 +2,7 @@
 
 @section('content')
 
-    @if (session('status'))
-
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-        <strong>Sucesso!</strong> {{ session('status') }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        </div>
-    @endif
-
     <table class="table table-striped table-sm">
-
         <th>#</th>
         <th>Loja</th>
         <th>Ações</th>
@@ -23,8 +12,8 @@
                 <td>{{ $store->id }}</td>
             <td>{{ $store->name }}</td>
                 <td>
-                    <a href="/admin/store/{{ $store->id }}/edit">Editar</a>
-                    <a href="/admin/store/{{ $store->id }}/delete">Apagar</a>
+                    <a href="{{ route('admin.store.edit',[$store->id]) }}" class="btn btn-primary btn-sm" data-toggle="tooltip" data-placement="left" title="Editar"><i class="fas fa-edit fa-2x"></i></a>
+                    <a href="{{ route('admin.store.destroy',[$store->id]) }}" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="right" title="Remover"><i class="fas fa-trash fa-2x"></i></a>
                 </td>
             </tr>
         @endforeach

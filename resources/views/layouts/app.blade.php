@@ -10,7 +10,9 @@
 <body>
 
 	<div class="container">
-
+		<div class="pt-2">
+			@include('flash::message')
+		</div>
 		@yield('content')
 
 	</div>
@@ -20,6 +22,15 @@
         crossorigin="anonymous">
     </script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+	<script src="https://kit.fontawesome.com/72da054647.js" crossorigin="anonymous"></script>
+	<script>
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
+	</script>
+	<script>
+		$('div.alert').not('.alert-important').delay(3500).fadeOut(4000);
+	</script>
 </body>
 </html>

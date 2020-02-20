@@ -16,15 +16,14 @@ Route::get('/', function () {
     //return User::all();
     return view('welcome');
 });
-Route::prefix('admin')->namespace('Admin')->group(function(){
+Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
 
-	Route::prefix('store')->group(function(){
-		Route::get('/','StoreController@index'); //Lista as lojas existentes
-		Route::get('/create','StoreController@create'); //Abre o formulario para criaçao
-		Route::post('/store','StoreController@store'); //Grava na Base de Dados
-
-		Route::get('/{store}/edit', 'StoreController@edit');
-        Route::post('/update/{store}', 'StoreController@update');
-        Route::get('/{store}/delete', 'StoreController@delete');
+	Route::prefix('store')->name('store.')->group(function(){
+		Route::get('/','StoreController@index')->name('index'); //Lista as lojas existentes
+		Route::get('/create','StoreController@create')->name('create'); //Abre o formulario para criaçao
+		Route::post('/store','StoreController@store')->name('store'); //Grava na Base de Dados
+		Route::get('/{store}/edit', 'StoreController@edit')->name('edit');
+        Route::post('/update/{store}', 'StoreController@update')->name('update');
+        Route::get('/{store}/destroy', 'StoreController@destroy')->name('destroy');
 	});
 });

@@ -4,7 +4,7 @@
 
 	<h1>Criar Loja</h1>
 
-<form action="/admin/store/update/{{ $store->id }}" method="post">
+<form action="{{ route('admin.store.update',[$store->id]) }}" method="post">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 		<div class="form-group">
