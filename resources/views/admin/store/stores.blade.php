@@ -15,9 +15,9 @@
                 <td>{{ $store->name }}</td>
                 <td>
                     <a href="{{ route('admin.store.edit',[$store->id]) }}" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a>
-                    <a href="javascript:void(0);" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Remover" onclick="$(this).find('form').submit();" >
+                    <a href="#delete" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Remover" onclick="document.querySelector('#delete_store').submit();" >
                         <i class="fas fa-trash"></i>
-                        <form action="{{ route('admin.store.destroy',[$store->id]) }}" method="post">
+                        <form action="{{ route('admin.store.destroy',[$store->id]) }}" method="post" id="delete_store">
                             @method("DELETE")
                             @csrf
                         </form>
