@@ -3,8 +3,9 @@
 @section('content')
 
 	<h1>Criar Loja</h1>
+<fieldset class="shadow p-3 mb-5 bg-white rounded">
 
-<form action="{{ route('admin.store.update',[$store->id]) }}" method="post">
+	<form action="{{ route('admin.store.update',[$store->id]) }}" method="post">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 		<div class="form-group">
@@ -32,9 +33,8 @@
 			<input type="text" name="slug" value="{{ $store->slug }}" id="slug"  class="form-control">
 		</div>
 
-		</div>
-
-		<button type="submit" class="btn btn-success btn-lg">Atualizar Loja</button>
+		<button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-sync-alt"></i><span class="pl-2">Atualizar Loja</span></button>
 	</form>
+</fieldset>
 
 @endsection

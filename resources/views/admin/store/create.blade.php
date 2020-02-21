@@ -4,7 +4,7 @@
 
 	<h1>Criar Loja</h1>
 
-	<form action="{{ route('admin.store.store')" method="post">
+	<form action="{{ route('admin.store.store') }}" method="post">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
 
 		<div class="form-group">
