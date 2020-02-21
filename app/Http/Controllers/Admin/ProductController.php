@@ -44,12 +44,12 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $store = Store::find($request->store);
-
-        $store->product->create($request->all());
+        $data = $request->all();
+        $store = Store::find( $data['store']);
+        $store->products()->create($data);
         flash('Produto criado!')->success();
 
-        return redirect()->route('admin.product');
+        return redirect()->route('admin.products.index');
     }
 
     /**
@@ -60,7 +60,8 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        return Product::find($id);
+        dd('Veio no Show');
+        return Product::findOrFail($id);
     }
 
     /**
@@ -71,7 +72,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = $this->products->find($id);
+        $product = $this->products->findOrFail($id);
 
         return view('admin.product.edit', compact('product'));
     }
@@ -85,13 +86,10 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $product = $this
-                ->products
-                ->find($id)
-                ->update();
+        $this->products->findOrFail($id)->update($request->all());
         flash('Produto alterado!')->success();
 
-        return redirect()->route('admin.product.index');
+        return redirect()->route('admin.products.index');
     }
 
     /**
@@ -102,11 +100,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        $product = $this->products->find($id);
-        $products->delete();
-
+        $this->products->findOrFail($id)->delete();
         flash('Produto excluído!')->success();
 
-        return redirect()->route('admin.product.index');
+        return redirect()->route('admin.products.index');
     }
 }

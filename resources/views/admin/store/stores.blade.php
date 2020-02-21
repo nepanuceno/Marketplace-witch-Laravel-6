@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <a class="btn btn-primary mr-2 mb-5" href="{{ route('admin.store.create') }}"><i class="fas fa-store fa-2x pb-2"></i><span class="pl-2">Criar Loja</span></a>  
+    <a class="btn btn-primary mr-2 mb-5" href="{{ route('admin.store.create') }}"><i class="fas fa-store fa-2x pb-2"></i><span class="pl-2">Criar Loja</span></a>
 
     <table class="table table-striped table-sm">
         <th>#</th>
@@ -12,10 +12,16 @@
         @foreach ($stores as $store)
             <tr>
                 <td>{{ $store->id }}</td>
-            <td>{{ $store->name }}</td>
+                <td>{{ $store->name }}</td>
                 <td>
-                    <a href="{{ route('admin.store.edit',[$store->id]) }}" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="left" title="Editar"><i class="fas fa-edit fa-2x"></i></a>
-                    <a href="{{ route('admin.store.destroy',[$store->id]) }}" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="right" title="Remover"><i class="fas fa-trash fa-2x"></i></a>
+                    <a href="{{ route('admin.store.edit',[$store->id]) }}" class="btn btn-secondary btn-sm" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-edit"></i></a>
+                    <a href="javascript:void(0);" class="btn btn-danger btn-sm" data-toggle="tooltip" data-placement="top" title="Remover" onclick="$(this).find('form').submit();" >
+                        <i class="fas fa-trash"></i>
+                        <form action="{{ route('admin.store.destroy',[$store->id]) }}" method="post">
+                            @method("DELETE")
+                            @csrf
+                        </form>
+                    </a>
                 </td>
             </tr>
         @endforeach

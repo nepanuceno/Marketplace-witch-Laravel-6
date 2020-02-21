@@ -6,8 +6,8 @@
 <fieldset class="shadow p-3 mb-5 bg-white rounded">
 
 	<form action="{{ route('admin.store.update',[$store->id]) }}" method="post">
-		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-
+        @method("PUT")
+        @csrf
 		<div class="form-group">
 			<label for="">Nome da Loja</label>
 		<input type="text" name="name" id="name" value="{{ $store->name }}" class="form-control">
