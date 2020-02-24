@@ -12,15 +12,18 @@
 */
 use \App\User;
 Route::get('/', function () {
-
-    //return User::all();
     return view('welcome');
-});
+})->name('home');
+
 Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
-    Route::resource('/store','StoreController');
-	Route::resource('/products','ProductController');
+
+    Route::group(['middleware'=>['auth']], function(){
+        Route::resource('/store','StoreController');
+        Route::resource('/products','ProductController');
+    });
+
 });
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');

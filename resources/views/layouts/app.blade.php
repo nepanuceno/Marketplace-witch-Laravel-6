@@ -9,6 +9,39 @@
 </head>
 <body>
 
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="{{ route('home') }}">Home</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  @auth
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item @if(request()->is('admin/store')) active @endif">
+        <a class="nav-link" href="{{ route('admin.store.index') }}">Lojas <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item @if(request()->is('admin/products')) active @endif">
+        <a class="nav-link" href="{{ route('admin.products.index') }}">Produtos</a>
+      </li>
+    </ul>
+    <div class="my-2 my-lg-0">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#">{{ auth()->user()->name }} </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#" onclick="event.preventDefault(); document.querySelector('#form_logout').submit();">Sair
+            <form action="{{ route('logout') }}" id="form_logout" method="post">
+              @csrf 
+            </form>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+  @endauth
+</nav>
+
 	<div class="container">
 		<div class="pt-2">
 			@include('flash::message')
