@@ -15,13 +15,15 @@ class StoreController extends Controller
 {    
     public function __construct()
     {
-        
+       $this->middleware('user.has.store')->only(['create', 'store']); 
     }
 
     public function index()
     {
-        $stores = Auth::user()->store()->paginate(10);
-        return view('admin.store.stores', compact('stores'));
+        //$stores = Auth::user()->store()->paginate(10);
+
+        $store = Auth()->user()->store;
+        return view('admin.store.stores', compact('store'));
     }
 
     public function create()
@@ -33,8 +35,9 @@ class StoreController extends Controller
     public function store(StoreRequest $request)
     {
 
+        $store = Auth()->user()->store()->create($request->all());
+        //dd($store);
         flash('Loja criada com sucesso!')->success();
-        $this->user->store()->create($request->all());
         return redirect()->route('admin.store.index');
     }
 

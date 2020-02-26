@@ -33,8 +33,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $stores = Store::all();
-        return view('admin.product.create', compact('stores'));
+        return view('admin.product.create');
     }
 
     /**
@@ -46,7 +45,7 @@ class ProductController extends Controller
     public function store(ProductRequest $request)
     {
         $data = $request->all();
-        $store = Store::find( $data['store']);
+        $store = Auth::user()->store();
         $store->products()->create($data);
         flash('Produto criado!')->success();
 

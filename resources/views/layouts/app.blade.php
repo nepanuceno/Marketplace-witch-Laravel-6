@@ -63,7 +63,7 @@
 		})
 	</script>
 	<script>
-		$('div.alert').not('.alert-important').delay(3500).fadeOut(4000);
+    $('div.alert').not('.alert-important').delay(3500).fadeOut(4000);
 	</script>
 </body>
 </html>
