@@ -17,10 +17,10 @@
   @auth
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item @if(request()->is('admin/store')) active @endif">
+      <li class="nav-item @if(request()->is('admin/store*')) active @endif">
         <a class="nav-link" href="{{ route('admin.store.index') }}">Lojas <span class="sr-only">(current)</span></a>
       </li>
-      <li class="nav-item @if(request()->is('admin/products')) active @endif">
+      <li class="nav-item @if(request()->is('admin/products*')) active @endif">
         <a class="nav-link" href="{{ route('admin.products.index') }}">Produtos</a>
       </li>
     </ul>
@@ -63,7 +63,11 @@
 		})
 	</script>
 	<script>
-    $('div.alert').not('.alert-important').delay(3500).fadeOut(4000);
+    // $('div.alert').not('.alert-important').delay(3500).fadeOut(4000);
+
+    // $('.btn-delete').click(function(){
+    //   $(this).find('form').submit();
+    // });
 	</script>
 </body>
 </html>
