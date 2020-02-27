@@ -2,7 +2,7 @@
 
 @section('content')
 
-    <a class="btn btn-primary mr-2 mb-5" href="{{ route('admin.products.create') }}">
+    <a class="btn btn-primary mr-2 mb-5" href="{{ route('admin.categories.create') }}">
         <i class="fas fa-boxes fa-2x pb-2"></i><span class="pl-2">Cadastrar Categoria</span>
     </a>
 
@@ -35,4 +35,7 @@
     </table>
 
     {{ $categories->links() }}
+@endsection
+
+@section('javascript')
 @endsection

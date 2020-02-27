@@ -53,7 +53,7 @@ class CategoryController extends Controller
     {
         $data = $request->all();
 
-        $category = $this->category->create($data);
+        $this->category->create($data);
 
         flash('Categoria Criado com Sucesso!')->success();
         return redirect()->route('admin.categories.index');
@@ -76,11 +76,11 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($category)
     {
         $category = $this->category->findOrFail($category);
 
-        return view('admin.categories.edit', compact('category'));
+        return view('admin.category.edit', compact('category'));
     }
 
     /**
@@ -90,7 +90,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $category)
     {
         $data = $request->all();
 
@@ -107,7 +107,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($category)
     {
         $category = $this->category->find($category);
         $category->delete();

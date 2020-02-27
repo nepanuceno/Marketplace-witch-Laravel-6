@@ -12,16 +12,14 @@ use Illuminate\Support\Facades\Auth;
 
 
 class StoreController extends Controller
-{    
+{
     public function __construct()
     {
-       $this->middleware('user.has.store')->only(['create', 'store']); 
+       $this->middleware('user.has.store')->only(['create', 'store']);
     }
 
     public function index()
     {
-        //$stores = Auth::user()->store()->paginate(10);
-
         $store = Auth()->user()->store;
         return view('admin.store.stores', compact('store'));
     }

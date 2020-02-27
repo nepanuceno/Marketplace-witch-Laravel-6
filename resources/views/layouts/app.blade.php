@@ -63,14 +63,12 @@
 	<script>
 		$(function () {
 			$('[data-toggle="tooltip"]').tooltip()
-		})
-	</script>
-	<script>
-    // $('div.alert').not('.alert-important').delay(3500).fadeOut(4000);
+		});
 
-    // $('.btn-delete').click(function(){
-    //   $(this).find('form').submit();
-    // });
+        $('div.alert').not('.alert-important').delay(3500).fadeOut(4000);
 	</script>
+
+    @yield('javascript')
+
 </body>
 </html>
