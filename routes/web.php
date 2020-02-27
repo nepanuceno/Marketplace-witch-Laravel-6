@@ -20,6 +20,8 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
     Route::group(['middleware'=>['auth']], function(){
         Route::resource('/store','StoreController');
         Route::resource('/products','ProductController');
+        Route::resource('/categories','CategoryController');
+
     });
 
 });

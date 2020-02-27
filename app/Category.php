@@ -9,6 +9,6 @@ class Category extends Model
     protected $fillable = ['name', 'description', 'slug'];
 
     public function products(){
-        return $this->belongToMany(Products::class);
+        return $this->belongsToMany(Products::class);
     }
 }
