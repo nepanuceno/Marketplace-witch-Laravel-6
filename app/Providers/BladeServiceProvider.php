@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Blade;
 
 class BladeServiceProvider extends ServiceProvider
 {
@@ -23,10 +24,7 @@ class BladeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Add @var for Variable Assignment
-        // Example: @DELETE('foo', 'bar')
-        Blade::directive('delete_field', function ($expression) {
-           return '<a href="javascript:void(0);" class="btn btn-danger btn-sm" data-toggle="tooltip" onclick="$(this).find(\'form\').submit();" >';
-        });
+
+        dd('VEIO');
     }
 }

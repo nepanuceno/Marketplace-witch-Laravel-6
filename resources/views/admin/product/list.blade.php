@@ -34,7 +34,7 @@
         @endforeach
     </table>
 
-    @delete_field('admin.products.destroy')
+    @delete_button()
 
     {{ $products->links() }}
 @endsection
