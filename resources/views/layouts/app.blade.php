@@ -6,6 +6,7 @@
 	<title>MarketPlace - Laravel 6</title>
 	<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+  <!-- <link rel="stylesheet" href="/css/app.css"> -->
 </head>
 <body>
 
@@ -52,6 +53,7 @@
 		@yield('content')
 
 	</div>
+    <!-- <script src="/js/app.js"></script> -->
     <script
         src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
@@ -65,7 +67,11 @@
 			$('[data-toggle="tooltip"]').tooltip()
 		});
 
-        $('div.alert').not('.alert-important').delay(3500).fadeOut(4000);
+    $('div.alert').not('.alert-important').delay(3500).fadeOut(4000);
+
+    // $(document).ready(function() {
+    //   $('.select2').select2();
+    // });
 	</script>
 
     @yield('javascript')

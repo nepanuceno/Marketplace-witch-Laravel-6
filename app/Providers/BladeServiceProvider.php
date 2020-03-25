@@ -24,7 +24,6 @@ class BladeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
-        dd('VEIO');
+        return true;
     }
 }

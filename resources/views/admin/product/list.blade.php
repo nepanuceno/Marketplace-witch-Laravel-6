@@ -34,7 +34,5 @@
         @endforeach
     </table>
 
-    @delete_button()
-
     {{ $products->links() }}
 @endsection

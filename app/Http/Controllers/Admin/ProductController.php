@@ -5,8 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Store;
 use App\Product;
+use App\Category;
 use App\Http\Requests\ProductRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class ProductController extends Controller
 {
@@ -33,7 +36,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('admin.product.create');
+        $categories = Category::all(['id','name']);
+        return view('admin.product.create', compact('categories'));
     }
 
     /**
@@ -46,7 +50,8 @@ class ProductController extends Controller
     {
         $data = $request->all();
         $store = Auth::user()->store();
-        $store->products()->create($data);
+        $product = $store->products()->create($data);
+        $product->category()->sync($data['categories']);
         flash('Produto criado!')->success();
 
         return redirect()->route('admin.products.index');
@@ -73,8 +78,10 @@ class ProductController extends Controller
     public function edit($id)
     {
         $product = $this->products->findOrFail($id);
+        $categories = Category::all(['id','name']);
 
-        return view('admin.product.edit', compact('product'));
+
+        return view('admin.product.edit', compact('product', 'categories'));
     }
 
     /**
