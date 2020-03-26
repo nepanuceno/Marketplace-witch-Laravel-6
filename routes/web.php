@@ -22,6 +22,8 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
         Route::resource('/products','ProductController');
         Route::resource('/categories','CategoryController');
 
+        Route::post('photos/remove', 'ProductPhotoController@removePhoto')->name('photo.remove');
+
     });
 
 });

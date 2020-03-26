@@ -108,9 +108,14 @@ class ProductController extends Controller
         $product->update($data);
         $product->category()->sync($data['categories']);
 
+        if($request->hasFile('photos')) {
+            $images = $this->imageUpload($request, 'image');
+            $product->photos()->createMany($images);
+        }
+
         flash('Produto alterado!')->success();
 
-        return redirect()->route('admin.products.index');
+        return redirect()->route('admin.products.edit', ['product' => $product]);
     }
 
     /**

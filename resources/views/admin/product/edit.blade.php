@@ -5,7 +5,7 @@
     <fieldset>
         <legend for="">Editar Produto</legend>
 
-        <form action="{{ route('admin.products.update', ['product'=>$product->id]) }}" method="post">
+        <form action="{{ route('admin.products.update', ['product'=>$product->id]) }}" method="post" enctype="multipart/form-data">
             @csrf
             @method("PUT")
             <div class="form-group">
@@ -46,6 +46,11 @@
             </div>
 
             <div class="form-group">
+                <label for="">Fotos do produto</label>
+                <input name="photos[]" type="file" class="form-control" multiple>
+            </div>
+
+            <div class="form-group">
                 <label for="">Slug</label>
                 <input type="text" name="slug" value="{{ $product->slug }}" id="slug"  class="form-control">
             </div>
@@ -55,6 +60,21 @@
             </button>
 
         </form>
+        <hr>
+
+        <div class="row">
+            @foreach($product->photos as $photo)
+                <div class="col-4 text-center">
+                    <img src="{{ asset('storage/'.$photo->image) }}" alt="" class="img-fluid">
+
+                    <form action="{{route('admin.photo.remove')}}" method="post">
+                        @csrf
+                        <input type="hidden" name="photoName" value="{{ $photo->image }}">
+                        <button type="submit" class="btn btn-danger">Remover</button>
+                    </form>
+                </div>
+            @endforeach
+        </div>
     </fieldset>
 
 @endsection
