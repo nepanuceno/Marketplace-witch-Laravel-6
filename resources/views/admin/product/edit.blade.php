@@ -29,6 +29,21 @@
                     {{ $product->body }}
                 </textarea>
             </div>
+            <div class="form-group">
+                <label for="">Categoria</label>
+                <select name="categories[]" class="form-control select2" multiple>
+                    @foreach($categories as $category)
+                        <option value="{{ $category->id }}" @if($product->category->contains($category)) selected @endif>
+                            {{ $category->name }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('body')
+                <div class="invalid-feedback">
+                    {{$message}}
+                </div>
+                @enderror
+            </div>
 
             <div class="form-group">
                 <label for="">Slug</label>

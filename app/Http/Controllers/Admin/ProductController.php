@@ -25,7 +25,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = $this->products->paginate(10);
+//        $products = $this->products->paginate(10);
+        $userStore = Auth::user()->store;
+        $products = $userStore->products()->paginate(10);
+
         return view('admin.product.list', compact('products'));
     }
 
@@ -47,11 +50,18 @@ class ProductController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(ProductRequest $request)
-    {
+    { //ProductRequest
+
         $data = $request->all();
-        $store = Auth::user()->store();
+        $store = Auth::user()->store;
         $product = $store->products()->create($data);
         $product->category()->sync($data['categories']);
+
+        if($request->hasFile('photos')) {
+            $images = $this->imageUpload($request, 'image');
+            $product->photos()->createMany($images);
+        }
+
         flash('Produto criado!')->success();
 
         return redirect()->route('admin.products.index');
@@ -91,9 +101,13 @@ class ProductController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(ProductRequest $request, $id)
+    public function update(ProductRequest $request, $product)
     {
-        $this->products->findOrFail($id)->update($request->all());
+        $data = $request->all();
+        $product = $this->products->findOrFail($product);
+        $product->update($data);
+        $product->category()->sync($data['categories']);
+
         flash('Produto alterado!')->success();
 
         return redirect()->route('admin.products.index');
@@ -111,5 +125,16 @@ class ProductController extends Controller
         flash('Produto excluído!')->success();
 
         return redirect()->route('admin.products.index');
+    }
+
+    private function imageUpload(Request $request, $imageColumn)
+    {
+        $images = $request->file('photos');
+        $uploadedImages = [];
+
+        foreach ($images as $image) {
+            $uploadedImages[] = [$imageColumn => $image->store('products','public')];
+        }
+        return $uploadedImages;
     }
 }

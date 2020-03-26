@@ -9,7 +9,7 @@ class Store extends Model
     protected $fillable = ['name', 'description', 'phone', 'mobile_phone','slug'];
     public function user()
     {
-        return $this->belongsTo(User::class); //Um usuario pertence a uma loja
+        return $this->belongsTo(User::class); //Uma loja pertence a um Usuario
     }
 
     public function products()
