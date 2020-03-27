@@ -3,15 +3,11 @@
 
 namespace App\Traits;
 
-
-use Illuminate\Http\Request;
-
 trait UploadTrait
 {
     private function imageUpload($images, $imageColumn=null)
     {
         $uploadedImages = [];
-
         if(is_array($images)) {
             foreach ($images as $image) {
                 $uploadedImages[] = [$imageColumn => $image->store('products','public')];
@@ -19,8 +15,6 @@ trait UploadTrait
         } else {
             $uploadedImages = $images->store('logos','public');
         }
-
         return $uploadedImages;
     }
-
 }

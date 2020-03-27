@@ -7,7 +7,7 @@
 
 	<form action="{{ route('admin.store.update',['store'=>$store->id]) }}" method="post" enctype="multipart/form-data">
         @csrf
-        @method("PUT")
+        @method("PATCH")
 
         <div class="form-group">
 			<label for="">Nome da Loja</label>
@@ -30,11 +30,22 @@
 		</div>
 
 		<div class="form-group">
-            <p>
-                <img src="{{ asset('storage/'.$store->logo) }}" alt="">
-            </p>
-            <label for="">Logo da Loja</label>
-            <input name="logo" type="file" class="form-control">
+            <fieldset>
+                <legend>Logo da Loja</legend>
+                @isset($store->logo)
+                <p>
+                    <img src="{{ asset('storage/'.$store->logo) }}" alt="">
+                </p>
+                @endisset
+                <label for="">Selecionar Imagem</label>
+                <input name="logo" type="file" class="form-control @error('logo') is-invalid @enderror">
+                @error('logo')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+                @enderror
+            </fieldset>
+
         </div>
 
 		<div class="form-group">

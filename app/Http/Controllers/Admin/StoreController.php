@@ -35,14 +35,12 @@ class StoreController extends Controller
 
     public function store(StoreRequest $request)
     {
-
         $store = Auth()->user()->store();
-        $store->create($request->all());
-        //dd($store);
 
         if($request->hasFile('logo')) {
             $date['logo'] = $this->imageUpload($request->file('logo'));
         }
+        $store->create($request->all());
 
         flash('Loja criada com sucesso!')->success();
         return redirect()->route('admin.store.index');
@@ -61,16 +59,15 @@ class StoreController extends Controller
     public function update(StoreRequest $request, $store)
     {
         $data = $request->all();
-
-        dd($data);
         $store = Store::find($store);
 
         if($request->hasFile('logo')) {
-            if(Storage::disk('public')->exists($store->logo))
+            if(Storage::disk('public')->exists($store->logo)) {
+                Storage::disk('public')->delete($store->logo);
+            }
             $data['logo'] = $this->imageUpload($request->file('logo'));
         }
-
-        $store->update($request->all());
+        $store->update($data);
 
         flash('Loja modificada com sucesso!')->success();
         return redirect()->route('admin.store.index');

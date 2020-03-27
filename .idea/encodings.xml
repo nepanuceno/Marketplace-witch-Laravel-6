@@ -5,9 +5,13 @@
     <file url="file://$PROJECT_DIR$/.idea/.gitignore" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/Controllers/Admin/ProductPhotoController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/Controllers/Admin/StoreController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Http/Requests/ProductRequest.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Http/Requests/StoreRequest.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Product.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/ProductImage.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Providers/AppServiceProvider.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Store.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Traits/UploadTrait.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/database/migrations/2020_03_25_193644_create_product_photos_table.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/database/migrations/2020_03_25_193952_alter_table_stores_add_column_logo.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/routes/web.php" charset="UTF-8" />

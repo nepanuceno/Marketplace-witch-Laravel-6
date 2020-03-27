@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Traits\UploadTrait;
 use App\Store;
 use App\Product;
 use App\Category;
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
+    use UploadTrait;
     private $products;
     public function __construct(Product $products)
     {
@@ -58,7 +60,7 @@ class ProductController extends Controller
         $product->category()->sync($data['categories']);
 
         if($request->hasFile('photos')) {
-            $images = $this->imageUpload($request, 'image');
+            $images = $this->imageUpload($request->file('photos'), 'image');
             $product->photos()->createMany($images);
         }
 

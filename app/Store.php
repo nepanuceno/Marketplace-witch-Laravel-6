@@ -16,9 +16,4 @@ class Store extends Model
     {
         return $this->hasMany(Product::class); //Uma loja possui muitos produtos
     }
-
-    public function StoreLogo()
-    {
-        $this->hasOne(StoreLogo::class);
-    }
 }
