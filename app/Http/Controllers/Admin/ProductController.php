@@ -109,7 +109,7 @@ class ProductController extends Controller
         $product->category()->sync($data['categories']);
 
         if($request->hasFile('photos')) {
-            $images = $this->imageUpload($request, 'image');
+            $images = $this->imageUpload($request->file('photos'), 'image');
             $product->photos()->createMany($images);
         }
 

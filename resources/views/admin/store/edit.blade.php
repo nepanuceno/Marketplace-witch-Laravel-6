@@ -2,13 +2,14 @@
 
 @section('content')
 
-	<h1>Criar Loja</h1>
+	<h1>Editar Loja</h1>
 <fieldset class="shadow p-3 mb-5 bg-white rounded">
 
-	<form action="{{ route('admin.store.update',[$store->id]) }}" method="post" enctype="multipart/form-data">
-        @method("PUT")
+	<form action="{{ route('admin.store.update',['store'=>$store->id]) }}" method="post" enctype="multipart/form-data">
         @csrf
-		<div class="form-group">
+        @method("PUT")
+
+        <div class="form-group">
 			<label for="">Nome da Loja</label>
 		<input type="text" name="name" id="name" value="{{ $store->name }}" class="form-control">
 		</div>
@@ -29,6 +30,9 @@
 		</div>
 
 		<div class="form-group">
+            <p>
+                <img src="{{ asset('storage/'.$store->logo) }}" alt="">
+            </p>
             <label for="">Logo da Loja</label>
             <input name="logo" type="file" class="form-control">
         </div>

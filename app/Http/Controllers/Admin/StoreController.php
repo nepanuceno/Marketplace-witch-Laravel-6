@@ -9,7 +9,7 @@ use App\Traits\UploadTrait;
 use App\Http\Requests\StoreRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\Storage;
 
 
 class StoreController extends Controller
@@ -41,11 +41,15 @@ class StoreController extends Controller
         //dd($store);
 
         if($request->hasFile('logo')) {
-            $date['logo'] = $this->imageUpload($request);
+            $date['logo'] = $this->imageUpload($request->file('logo'));
         }
 
         flash('Loja criada com sucesso!')->success();
         return redirect()->route('admin.store.index');
+    }
+
+    public function show($store){
+        dd('Show '.$store);
     }
 
     public function edit($store)
@@ -56,8 +60,18 @@ class StoreController extends Controller
 
     public function update(StoreRequest $request, $store)
     {
-        $result = Store::find($store);
-        $result->update($request->all());
+        $data = $request->all();
+
+        dd($data);
+        $store = Store::find($store);
+
+        if($request->hasFile('logo')) {
+            if(Storage::disk('public')->exists($store->logo))
+            $data['logo'] = $this->imageUpload($request->file('logo'));
+        }
+
+        $store->update($request->all());
+
         flash('Loja modificada com sucesso!')->success();
         return redirect()->route('admin.store.index');
     }
