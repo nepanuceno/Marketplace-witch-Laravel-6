@@ -48,11 +48,6 @@
 
         </div>
 
-		<div class="form-group">
-			<label for="">Slug</label>
-			<input type="text" name="slug" value="{{ $store->slug }}" id="slug"  class="form-control">
-		</div>
-
 		<button type="submit" class="btn btn-primary btn-lg"><i class="fas fa-sync-alt"></i><span class="pl-2">Atualizar Loja</span></button>
 	</form>
 </fieldset>

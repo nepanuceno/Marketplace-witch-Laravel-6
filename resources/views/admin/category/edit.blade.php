@@ -18,11 +18,6 @@
                 <input type="text" name="description" value="{{ $category->description }}" id="description"  class="form-control">
             </div>
 
-            <div class="form-group">
-                <label for="">Slug</label>
-                <input type="text" name="slug" value="{{ $category->slug }}" id="slug"  class="form-control">
-            </div>
-
             <button class="btn btn-primary btn-lg" type="submit">
                 <i class="fas fa-save"></i><span class="pl-2">Salvar</span>
             </button>

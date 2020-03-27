@@ -56,8 +56,11 @@ class ProductController extends Controller
 
         $data = $request->all();
         $store = Auth::user()->store;
+        $categories = $request->get('categories', null);
         $product = $store->products()->create($data);
-        $product->category()->sync($data['categories']);
+        if(!is_null($categories)) {
+            $product->category()->sync($data['categories']);
+        }
 
         if($request->hasFile('photos')) {
             $images = $this->imageUpload($request->file('photos'), 'image');
@@ -106,9 +109,13 @@ class ProductController extends Controller
     public function update(ProductRequest $request, $product)
     {
         $data = $request->all();
+        $categories = $request->get('categories', null);
         $product = $this->products->findOrFail($product);
         $product->update($data);
-        $product->category()->sync($data['categories']);
+
+        if(!is_null($categories)) {
+            $product->category()->sync($data['categories']);
+        }
 
         if($request->hasFile('photos')) {
             $images = $this->imageUpload($request->file('photos'), 'image');

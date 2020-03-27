@@ -35,12 +35,13 @@ class StoreController extends Controller
 
     public function store(StoreRequest $request)
     {
+        $data = $request->all();
         $store = Auth()->user()->store();
 
         if($request->hasFile('logo')) {
-            $date['logo'] = $this->imageUpload($request->file('logo'));
+            $data['logo'] = $this->imageUpload($request->file('logo'));
         }
-        $store->create($request->all());
+        $store->create($data);
 
         flash('Loja criada com sucesso!')->success();
         return redirect()->route('admin.store.index');

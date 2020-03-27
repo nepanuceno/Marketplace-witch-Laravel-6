@@ -30,11 +30,6 @@
             @enderror
 		</div>
 
-        <div class="form-group">
-            <label for="">Slug</label>
-            <input type="text" name="slug" value="" id="slug"  class="form-control">
-        </div>
-
         <button class="btn btn-primary btn-lg" type="submit">
             <i class="fas fa-plus"></i><span class="pl-2">Cadastrar</span>
         </button>
