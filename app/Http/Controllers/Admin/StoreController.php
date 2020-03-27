@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Store;
 use App\User;
+use App\Traits\UploadTrait;
 use App\Http\Requests\StoreRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -13,6 +14,8 @@ use Illuminate\Support\Facades\Auth;
 
 class StoreController extends Controller
 {
+    use UploadTrait;
+
     public function __construct()
     {
        $this->middleware('user.has.store')->only(['create', 'store']);
@@ -33,8 +36,14 @@ class StoreController extends Controller
     public function store(StoreRequest $request)
     {
 
-        $store = Auth()->user()->store()->create($request->all());
+        $store = Auth()->user()->store();
+        $store->create($request->all());
         //dd($store);
+
+        if($request->hasFile('logo')) {
+            $date['logo'] = $this->imageUpload($request);
+        }
+
         flash('Loja criada com sucesso!')->success();
         return redirect()->route('admin.store.index');
     }

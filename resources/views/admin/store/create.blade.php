@@ -4,7 +4,7 @@
 
 	<h1>Criar Loja</h1>
 
-	<form action="{{ route('admin.store.store') }}" method="post">
+	<form action="{{ route('admin.store.store') }}" method="post" enctype="multipart/form-data">
         @csrf
 		<div class="form-group">
 			<label for="">Nome da Loja</label>
@@ -47,6 +47,11 @@
 				</div>
 			@enderror
 		</div>
+
+		<div class="form-group">
+            <label for="">Logo da Loja</label>
+            <input name="logo" type="file" class="form-control">
+        </div>
 
 		<div class="form-group">
 			<label for="">Slug</label>

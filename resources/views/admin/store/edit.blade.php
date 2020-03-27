@@ -5,7 +5,7 @@
 	<h1>Criar Loja</h1>
 <fieldset class="shadow p-3 mb-5 bg-white rounded">
 
-	<form action="{{ route('admin.store.update',[$store->id]) }}" method="post">
+	<form action="{{ route('admin.store.update',[$store->id]) }}" method="post" enctype="multipart/form-data">
         @method("PUT")
         @csrf
 		<div class="form-group">
@@ -27,6 +27,11 @@
 			<label for="">WhatsApp</label>
 			<input type="text" name="mobile_phone" value="{{ $store->mobile_phone }}" id="mobile_phone"  class="form-control">
 		</div>
+
+		<div class="form-group">
+            <label for="">Logo da Loja</label>
+            <input name="logo" type="file" class="form-control">
+        </div>
 
 		<div class="form-group">
 			<label for="">Slug</label>
