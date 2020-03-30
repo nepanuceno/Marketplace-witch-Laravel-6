@@ -20,7 +20,7 @@ class Product extends Model
 
     public function store()
     {
-        $this->belongsTo(Store::class);  //Um produto pertence a uma loja
+        return $this->belongsTo(Store::class);  //Um produto pertence a uma loja
     }
 
     public function category(){

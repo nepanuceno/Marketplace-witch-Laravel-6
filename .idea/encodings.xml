@@ -8,6 +8,7 @@
     <file url="file://$PROJECT_DIR$/app/Http/Controllers/Admin/StoreController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/Controllers/Auth/LoginController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/Controllers/Auth/RegisterController.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/app/Http/Controllers/HomeController.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/Requests/ProductRequest.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Http/Requests/StoreRequest.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/app/Product.php" charset="UTF-8" />
@@ -19,6 +20,7 @@
     <file url="file://$PROJECT_DIR$/database/migrations/2020_03_25_193952_alter_table_stores_add_column_logo.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/home.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/layouts/front.blade.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resources/views/single.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/resources/views/welcome.blade.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/routes/web.php" charset="UTF-8" />
   </component>
