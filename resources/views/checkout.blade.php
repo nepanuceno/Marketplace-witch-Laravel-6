@@ -18,6 +18,7 @@
                         <div class="form-group">
                             <label for="">Número do Cartão <span class="brand"></span></label>
                             <input type="text" name="card_number" class="form-control">
+                            <input type="hidden" name="card_brand">
                         </div>
                     </div>
                 </div>
@@ -54,7 +55,7 @@
                     </div>
                 </div>
                 <hr class="mt-5">
-                <button class="btn btn-success">Confirmar Compra</button>
+                <button class="btn btn-success btn-lg processCheckout">Confirmar Compra</button>
             </form>
         </div>
     </div>
@@ -93,6 +94,8 @@
                         let imgLlag = `<img src="https://stc.pagseguro.uol.com.br/public/img/payment-methods-flags/68x30/${res.brand.name}.png">`;
                         spanBrand.innerHTML = imgLlag;
 
+                        document.querySelector('input[name=card_brand]').value = res.brand.name;
+
                         getInstallments(20000, res.brand.name);
                     },
                     error: function (err) {
@@ -103,6 +106,28 @@
                     }
                 });
             }
+        });
+
+        let submitButton = document.querySelector('button.processCheckout');
+
+        submitButton.addEventListener('click', function (event) {
+            event.preventDefault();
+            PagSeguroDirectPayment.createCardToken({
+                cardNumber: document.querySelector('input[name=card_number]').value,
+                brand: document.querySelector('input[name=card_brand]').value,
+                cvv: document.querySelector('input[name=card_cvv]').value,
+                expirationMonth: document.querySelector('input[name=card_month]').value,
+                expirationYear: document.querySelector('input[name=card_year]').value,
+                success: function (res) {
+                    console.log(res);
+                },
+                error: function () {
+
+                },
+                complet: function () {
+
+                }
+            });
         });
 
         function getInstallments(amount, brand)
