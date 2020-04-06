@@ -23,10 +23,10 @@ Route::prefix('cart')->name('cart.')->group(function(){
 
 Route::prefix('checkout')->name('checkout.')->group(function (){
     Route::get('/', 'CheckoutController@index')->name('index');
+    Route::post('/proccess', 'CheckoutController@proccess')->name('proccess');
 });
 
 Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
-
     Route::group(['middleware'=>['auth']], function(){
         Route::resource('/store','StoreController');
         Route::resource('/products','ProductController');
@@ -35,7 +35,6 @@ Route::prefix('admin')->name('admin.')->namespace('Admin')->group(function(){
         Route::post('photos/remove', 'ProductPhotoController@removePhoto')->name('photo.remove');
 
     });
-
 });
 
 Auth::routes();

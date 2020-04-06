@@ -16,6 +16,15 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group">
+                            <label for="">Nome Igual está no Cartão<span class="brand"></span></label>
+                            <input type="text" name="card_name" class="form-control">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
                             <label for="">Número do Cartão <span class="brand"></span></label>
                             <input type="text" name="card_number" class="form-control">
                             <input type="hidden" name="card_brand">
@@ -43,7 +52,7 @@
                 <div class="row d-none">
                     <div class="col-md-4 form-group">
                         <label for="">Opções de Parcelamento</label>
-                        <select name="installments_options" id="installments_options">
+                        <select name="installments_options" id="installments_options" class="installments_selected">
 
                         </select>
                     </div>
@@ -66,6 +75,7 @@
 @section('javascript')
 
     <script src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+    <script src="{{ asset('js/jquery-ajax.min.js') }}"></script>
     <script !src="">
         function NumberToMoney(value)
         {
@@ -99,7 +109,7 @@
                         getInstallments(20000, res.brand.name);
                     },
                     error: function (err) {
-                        console.log(err, "Deu erro!");
+                        console.log(err, "Deu erro no cartão, ou a sessão expirou!");
                     },
                     complete: function (res) {
                         //console.log(res, 'Completo');
@@ -119,7 +129,8 @@
                 expirationMonth: document.querySelector('input[name=card_month]').value,
                 expirationYear: document.querySelector('input[name=card_year]').value,
                 success: function (res) {
-                    console.log(res);
+                    console.log("TOKEN: ",res);
+                    processPayment(res.card.token)
                 },
                 error: function () {
 
@@ -129,6 +140,30 @@
                 }
             });
         });
+
+
+        function processPayment(token) {
+            let data = {
+                card_token: token,
+                hash: PagSeguroDirectPayment.getSenderHash(),
+                installment: document.querySelector('.installments_selected').value,
+                card_name: document.querySelector('input[name=card_name]').value,
+                _token: '{{ csrf_token() }}'
+            };
+            $.ajax({
+                type: 'POST',
+                url:'{{ route("checkout.proccess") }}',
+                data: data,
+                dataType:'json',
+
+                success: function(res){
+                    console.log(res);
+                },
+                error: function (res) {
+                    console.log('ERROR:', res);
+                }
+            });
+        }
 
         function getInstallments(amount, brand)
         {
@@ -144,7 +179,7 @@
                     res.installments[brand].forEach(function(item){
                         console.log(item);
 
-                        aux += `<option value="${item.totalAmount }">${item.quantity}X de R$ ${NumberToMoney(item.installmentAmount)} com o Total de <strong>${ "R$ "+NumberToMoney(item.totalAmount) } </strong></option>`
+                        aux += `<option data-valor="${item.installmentAmount} "value="${item.quantity }|${item.installmentAmount}">${item.quantity}X de R$ ${NumberToMoney(item.installmentAmount)} com o Total de <strong>${ "R$ "+NumberToMoney(item.totalAmount) } </strong></option>`
                     });
 
                     console.log("OPTION: ",aux);
@@ -153,8 +188,8 @@
 
                     var valor ='';
                         installments_options.addEventListener('change', function(){
-                        valor = installments_options[installments_options.selectedIndex].value;
-                            console.log(valor);
+                        valor = installments_options[installments_options.selectedIndex].getAttribute('data-valor');
+                        console.log(valor);
 
                         document.querySelector('.total').classList.remove('d-none');
                         document.querySelector('.valor_total').innerHTML = "R$ "+NumberToMoney(valor);
