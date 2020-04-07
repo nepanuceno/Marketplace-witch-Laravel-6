@@ -1,5 +1,8 @@
 @extends('layouts.front')
 
+@section('style')
+{{--    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">--}}
+@endsection
 @section('content')
 
     <div class="container">
@@ -75,6 +78,8 @@
 @section('javascript')
 
     <script src="https://stc.sandbox.pagseguro.uol.com.br/pagseguro/api/v2/checkout/pagseguro.directpayment.js"></script>
+{{--    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>--}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <script src="{{ asset('js/jquery-ajax.min.js') }}"></script>
     <script !src="">
         function NumberToMoney(value)
@@ -95,6 +100,8 @@
         let installments_options = document.querySelector('#installments_options');
         let installments_options_div = document.querySelector('.row.d-none');
 
+        let amountTrasaction = '{{ $cartItems }}';
+
         cardNumber.addEventListener('keyup', function(){
             if(cardNumber.value.length >= 6) {
                 PagSeguroDirectPayment.getBrand({
@@ -106,7 +113,7 @@
 
                         document.querySelector('input[name=card_brand]').value = res.brand.name;
 
-                        getInstallments(20000, res.brand.name);
+                        getInstallments(amountTrasaction, res.brand.name); //valor
                     },
                     error: function (err) {
                         console.log(err, "Deu erro no cartão, ou a sessão expirou!");
@@ -157,7 +164,25 @@
                 dataType:'json',
 
                 success: function(res){
-                    console.log(res);
+
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 5000,
+                        timerProgressBar: true,
+                        onOpen: (toast) => {
+                            toast.addEventListener('mouseenter', Swal.stopTimer)
+                            toast.addEventListener('mouseleave', Swal.resumeTimer)
+                        }
+                    });
+
+                    Toast.fire({
+                        icon: 'success',
+                        title: res.data.message
+                    }).then((result) => {
+                        window.location.href='{{ route('checkout.thanks') }}?order='+res.data.order;
+                    });
                 },
                 error: function (res) {
                     console.log('ERROR:', res);
