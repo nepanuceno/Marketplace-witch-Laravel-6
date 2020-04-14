@@ -30,6 +30,8 @@ class AppServiceProvider extends ServiceProvider
         \PagSeguro\Library::cmsVersion()->setName("MarketPlace")->setRelease("1.0.0");
         \PagSeguro\Library::moduleVersion()->setName("MarketPlace")->setRelease("1.0.0");
 
+
+
         Blade::directive('message_type', function($type_id) {
             return "<input id=\"message_type\" type=\"text\" name=\"type_id\" value=\"{$type_id}\">";
         });

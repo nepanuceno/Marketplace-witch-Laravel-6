@@ -25,4 +25,28 @@
             </div>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h2>Lojas Destaque</h2>
+        </div>
+        <hr>
+        @foreach($stores as $store)
+        <div class="col-4">
+            @if($store->logo)
+                <img src="{{ asset('storage/'.$store->logo) }}" alt="{{ $store->name }}" class="img-fluid">
+            @else
+                <img src="http://via.placeholder.com/300x260?text=Sem Logo" alt="" class="img-fluid">
+            @endif
+            <h3>{{ $store->name }}</h3>
+            <p>{{ $store->description }}</p>
+        </div>
+        @endforeach
+    </div>
+@endsection
+
+@section('javascript')
+    <script !src="">
+        $('.dropdown-toggle').dropdown()
+    </script>
 @endsection
